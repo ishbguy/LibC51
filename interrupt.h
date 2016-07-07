@@ -24,6 +24,7 @@
  */
 #ifndef __INTERRUPT_H__
 #define __INTERRUPT_H__
+
 #include <stdbool.h>
 
 #define INT0                    (1 << 7 | 1 << 0)
@@ -33,20 +34,13 @@
 #define LV0                     (0 << 0)
 #define LV1                     (0 << 2)
 
-#define INTV0                   0
-#define INTV1                   2
-#define UIV                     4
-#define TIV0                    1
-#define TIV1                    3
-#define TIV2                    5
-
 extern bool apm, lcdtoggle, starttoggle, uarttoggle;
 extern unsigned char *cmd, buf[], ms50;
 extern unsigned long tick, second;
 
 extern unsigned char InterruptInit(unsigned char intnum, unsigned char mode);
-extern void UartIsr(void) INTERRUPT UIV;
-extern void Timer0Isr(void) INTERRUPT TIV0;
-extern void InteruptIsr(void) INTERRUPT INTV0;
+extern void UartIsr(void) INTERRUPT SI0_VECTOR;
+extern void Timer0Isr(void) INTERRUPT TF0_VECTOR;
+extern void Interrupt0Isr(void) INTERRUPT IE0_VECTOR;
 
 #endif
