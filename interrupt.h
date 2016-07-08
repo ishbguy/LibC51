@@ -4,7 +4,7 @@
  * +---+---+---+---+---+---+---+---+---+
  * |BIT 7   6   5   4   3   2   1   0  |
  * +---+---+---+---+---+---+---+---+---+
- * |IE  EA  -   ET2 ES  ET1 EX1 ET0 EX0|
+ * |IE  EA   -  ET2 ES  ET1 EX1 ET0 EX0|
  * +---+---+---+---+---+---+---+---+---+
  * TCON TF1 TR1 TF0 TR0 IE1 IT1 IE0 IT0|
  * +---+---+---+---+---+---+---+---+---+
@@ -27,20 +27,22 @@
 
 #include <stdbool.h>
 
-#define INT0                    (1 << 7 | 1 << 0)
-#define INT1                    (1 << 7 | 1 << 2)
-#define DW0                     (1 << 0)
-#define DW1                     (1 << 2)
-#define LV0                     (0 << 0)
-#define LV1                     (0 << 2)
+/* Interrupt number */
+#define INT0                    (1 << 0)
+#define INT1                    (1 << 2)
+#define INT2                    (1 << 2)
+#define INT3                    (1 << 6)
 
-extern bool apm, lcdtoggle, starttoggle, uarttoggle;
-extern unsigned char *cmd, buf[], ms50;
-extern unsigned long tick, second;
+/* Trigger type */
+#define DROP0                   (1 << 0)
+#define DROP1                   (1 << 2)
+#define DROP2                   (1 << 0)
+#define DROP3                   (1 << 4)
+#define LOWVAL0                 (0 << 0)
+#define LOWVAL1                 (0 << 2)
+#define LOWVAL2                 (0 << 0)
+#define LOWVAL3                 (0 << 4)
 
-extern unsigned char InterruptInit(unsigned char intnum, unsigned char mode);
-extern void UartIsr(void) INTERRUPT SI0_VECTOR;
-extern void Timer0Isr(void) INTERRUPT TF0_VECTOR;
-extern void Interrupt0Isr(void) INTERRUPT IE0_VECTOR;
+extern bool InterruptInit(unsigned char intnum, unsigned char mode);
 
 #endif
