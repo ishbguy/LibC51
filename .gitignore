@@ -1,0 +1,14 @@
+*.bin
+*.hex
+*.ihx
+*.asm
+*.lk
+*.lst
+*.map
+*.mem
+*.rel
+*.rst
+*.sym
+*.swp
+main.*
+test.*
