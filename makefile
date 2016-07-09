@@ -1,6 +1,6 @@
 NAME	:= test
 BIN 	:= $(NAME).bin
-SRC 	:= $(NAME).c delay.c dht11.c interrupt.c lcd1602.c relay.c timer.c uart.c
+SRC 	:= $(NAME).c delay.c dht11.c interrupt.c lcd1602.c relay.c timer.c uart.c interrupt_service.c
 OBJ 	:= $(subst .c,.rel,$(SRC))
 CC  	:= sdcc
 CFLAG 	:= -c
