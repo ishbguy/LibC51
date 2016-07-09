@@ -320,6 +320,7 @@ __sbit __at 0xD7 CY         ;
 #define TF1_VECTOR      3       /* 0x1b timer 1 */
 #define SI0_VECTOR      4       /* 0x23 serial port 0 */
 #define TF2_VECTOR      5       /* 0x2B timer 2 */
-#define EX2_VECTOR      5       /* 0x2B external interrupt 2 */
+#define EX2_VECTOR      6       /* 0x33 external interrupt 2 */
+#define EX3_VECTOR      7       /* 0x3B external interrupt 3 */
 
 #endif /* End of include guard: __STC89C52RC_H__ */
