@@ -1,1 +1,3 @@
-This is STC89C52RC library in linux environment with sdcc.
+# LibC51
+
+A C library & application about STC89C52RC(51 MCU).
