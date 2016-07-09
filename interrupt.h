@@ -28,10 +28,10 @@
 #include <stdbool.h>
 
 /* Interrupt number */
-#define INT0                    (1 << 0)
-#define INT1                    (1 << 2)
-#define INT2                    (1 << 2)
-#define INT3                    (1 << 6)
+#define INTRPT0                 (1 << 0)
+#define INTRPT1                 (1 << 2)
+#define INTRPT2                 (1 << 2)
+#define INTRPT3                 (1 << 6)
 
 /* Trigger type */
 #define DROP0                   (1 << 0)
@@ -43,6 +43,13 @@
 #define LOWVAL2                 (0 << 0)
 #define LOWVAL3                 (0 << 4)
 
-extern bool InterruptInit(unsigned char intnum, unsigned char mode);
+typedef enum intno {
+        intrpt0,
+        intrpt1,
+        intrpt2,
+        intrpt3
+} INTNO;
+
+extern bool InterruptInit(INTNO intno, unsigned char mode);
 
 #endif
