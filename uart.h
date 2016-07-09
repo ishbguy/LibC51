@@ -16,7 +16,7 @@
  * +---+---+---+---+---+---+---+---+---+
  * SCON SM0 SM1 SM2 REN TB8 RB8  TI RI |
  * +---+---+---+---+---+---+---+---+---+
- * PCON SMOD -   -   -  GF1 GF0  PD IDL|
+ * PCON SMOD SMOD0 -POF GF1 GF0  PD IDL|
  * +---+---+---+---+---+---+---+---+---+
  * |PSW  CY  AC  F0 RS1 RS0 OV   -   P |
  * +---+---+---+---+---+---+---+---+---+
@@ -27,10 +27,10 @@
 #define __UART_H__
 
 /* UART MODE */
-#define UMD0                    (0 << 6)
-#define UMD1                    (1 << 6)
-#define UMD2                    (2 << 6)
-#define UMD3                    (3 << 6)
+#define UMode0                  (0 << 6)
+#define UMode1                  (1 << 6)
+#define UMode2                  (2 << 6)
+#define UMode3                  (3 << 6)
 
 /* TIMER1 MODE */
 #define T1M0                    (0 << 4)
