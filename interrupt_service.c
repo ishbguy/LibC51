@@ -8,6 +8,7 @@
 #include "interrupt.h"
 #include "uart.h"
 #include "timer.h"
+#include "clock.h"
 #include "delay.h"
 #include "lcd1602.h"
 #include "interrupt_service.h"

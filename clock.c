@@ -1,9 +1,11 @@
-/*
- * Thare are some function definition of timer
+/* 
+ * Name: clock.c
+ * Desc: Definition of clock functions.
+ * Auth: ishbguy@hotmail.com
+ * Date: 2016-07-11 22:09:03 
  */
-
 #include "config.h"
-#include "timer.h"
+#include "clock.h"
 
 unsigned char TimeConvert(unsigned int sec, unsigned char fmt)
 {
