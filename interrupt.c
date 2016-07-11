@@ -6,7 +6,7 @@
 #include "config.h"
 #include "interrupt.h"
 
-bool InterruptInit(INTNO intno, unsigned char mode)
+bool InterruptInit(INTNO intno, unsigned char type)
 {
         unsigned char IntSet[4] = {
                 INTRPT0,
@@ -15,16 +15,16 @@ bool InterruptInit(INTNO intno, unsigned char mode)
                 INTRPT3
         };
 
-        if (intno < intrpt0 && intno > intrpt3) {
+        if (intno < intrpt0 || intno > intrpt3) {
                 return FAILED;
         }
 
         if (intno <= intrpt2) {
                 IE    |= IntSet[intno];
-                TCON  |= mode;
+                TCON  |= type;
         }
         else {
-                XICON |= (IntSet[intno] | mode);
+                XICON |= (IntSet[intno] | type);
         }
 
         EA = 1;

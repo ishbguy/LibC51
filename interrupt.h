@@ -50,6 +50,6 @@ typedef enum intno {
         intrpt3
 } INTNO;
 
-extern bool InterruptInit(INTNO intno, unsigned char mode);
+extern bool InterruptInit(INTNO intno, unsigned char type);
 
 #endif
