@@ -25,6 +25,7 @@
 #ifndef __INTERRUPT_H__
 #define __INTERRUPT_H__
 
+#include "config.h"
 #include <stdbool.h>
 
 /* Interrupt number */
@@ -34,22 +35,30 @@
 #define INTRPT3                 (1 << 6)
 
 /* Trigger type */
-#define DROP0                   (1 << 0)
-#define DROP1                   (1 << 2)
-#define DROP2                   (1 << 0)
-#define DROP3                   (1 << 4)
-#define LOWVAL0                 (0 << 0)
-#define LOWVAL1                 (0 << 2)
-#define LOWVAL2                 (0 << 0)
-#define LOWVAL3                 (0 << 4)
+#define INTRPT0_DROP            (1 << 0)
+#define INTRPT1_DROP            (1 << 2)
+#define INTRPT2_DROP            (1 << 0)
+#define INTRPT3_DROP            (1 << 4)
+#define INTRPT0_LOWVAL          (0 << 0)
+#define INTRPT1_LOWVAL          (0 << 2)
+#define INTRPT2_LOWVAL          (0 << 0)
+#define INTRPT3_LOWVAL          (0 << 4)
 
-typedef enum intno {
-        intrpt0,
-        intrpt1,
-        intrpt2,
-        intrpt3
-} INTNO;
+/* Registers */
+#define INTRPT0_IE              IE
+#define INTRPT1_IE              IE
+#define INTRPT2_IE              IE
+#define INTRPT3_IE              XICON
 
-extern bool InterruptInit(INTNO intno, unsigned char type);
+#define INTRPT0_CON             TCON
+#define INTRPT1_CON             TCON
+#define INTRPT2_CON             TCON
+#define INTRPT3_CON             XICON
+
+
+#define IntrptInit(num,type)    do {\
+        num##_CON |= num##_##type;\
+        num##_IE  |= (num | IEA);\
+} while (0)
 
 #endif
