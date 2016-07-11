@@ -29,6 +29,7 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
+#include "config.h"
 #include <stdbool.h>
 
 /* Usages */
@@ -146,16 +147,5 @@
         timer##_CON |= timer##_TR; \
         IE          |= (timer##_IE | IEA); \
 } while (0)
-
-
-#define MSTIMES                 (46)
-#define TIMES                   (65536 - (MSTIMES * 1000))
-#define SEC                     (0)
-#define MIN                     (1)
-#define HOUR                    (2)
-
-extern unsigned char TimeConvert(unsigned int sec, unsigned char fmt);
-extern unsigned char AsciiToInt(unsigned char ch);
-extern unsigned int  TimeSet(unsigned char *time);
 
 #endif
