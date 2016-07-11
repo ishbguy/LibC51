@@ -5,30 +5,6 @@
 #include "config.h"
 #include "timer.h"
 
-/* TimerInit function, timer paramater is to specify timer0, timer1
- * timer2, the mstime is to specify the time you need to count in ms.
- */
-bool TimerInit(unsigned char timer, unsigned long times)
-{
-        if(timer == TIMER0) {
-                TMOD |= (T0M1 | GTC0 | TMR0);
-                TH0 = times / 256;
-                TL0 = times % 256;
-                ET0 = OPEN;
-                EA  = OPEN;
-                TR0 = RUN;
-        }
-        else if(timer == TIMER1) {
-                TMOD |= (T1M1 | GTC1 | TMR1);
-                TH1 = times / 256;
-                TL1 = times % 256;
-                ET1 = OPEN;
-                EA  = OPEN;
-                TR1 = RUN;
-        }
-        return SUCCESS;
-}
-
 unsigned char TimeConvert(unsigned int sec, unsigned char fmt)
 {
         extern bool apm;

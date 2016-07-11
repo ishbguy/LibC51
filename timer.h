@@ -31,51 +31,129 @@
 
 #include <stdbool.h>
 
-#define TIMER0                  0
-#define TIMER1                  1
-#define TIMER2                  2
-#define COUNTRE0                3
-#define COUNTER1                4
-#define COUNTRE2                5
-
-#define ENABLE                  1
-#define DISABLE                 0
-#define RUN                     1
-#define STOP                    0
-#define OPEN                    1
-#define CLOSE                   0
-#define PHIGH                   1
-#define PLOW                    0
-
-#define T0M0                    0
-#define T0M1                    1
-#define T0M2                    2
-#define T0M3                    3
-#define T1M0                    (0 << 4)
-#define T1M1                    (1 << 4)
-#define T1M2                    (2 << 4)
-#define T1M3                    (3 << 4)
-
-#define COUT0                   (1 << 2)
+/* Usages */
 #define TMR0                    (0 << 2)
-#define COUT1                   (1 << 6)
+#define CNT0                    (1 << 2)
 #define TMR1                    (0 << 6)
-#define GTO0                    (1 << 3)
-#define GTC0                    (0 << 3)
-#define GTO1                    (1 << 7)
-#define GTC1                    (0 << 7)
-#define T0R                     (1 << 4)
-#define T0S                     (0 << 4)
-#define T1R                     (1 << 6)
-#define T1S                     (0 << 6)
+#define CNT1                    (1 << 6)
+#define TMR2                    (0 << 1)
+#define CNT2                    (1 << 1)
+
+/* Modes */
+#define TMR0_Mode0              (0)
+#define TMR0_Mode1              (1)
+#define TMR0_Mode2              (2)
+#define TMR0_Mode3              (3)
+#define TMR1_Mode0              (0 << 4)
+#define TMR1_Mode1              (1 << 4)
+#define TMR1_Mode2              (2 << 4)
+#define TMR1_Mode3              (3 << 4)
+#define TMR2_Mode0              (1 << 0 | 0 << 4 | 0 << 5)
+#define TMR2_Mode1              (0 << 0 | 0 << 4 | 0 << 5)
+#define TMR2_Mode2              (1 << 4 | 1 << 5)
+#define TMR2_Mode3              (0)
+
+#define CNT0_Mode0              (0)
+#define CNT0_Mode1              (1)
+#define CNT0_Mode2              (2)
+#define CNT0_Mode3              (3)
+#define CNT1_Mode0              (0 << 4)
+#define CNT1_Mode1              (1 << 4)
+#define CNT1_Mode2              (2 << 4)
+#define CNT1_Mode3              (3 << 4)
+#define CNT2_Mode0              (1 << 0 | 0 << 4 | 0 << 5)
+#define CNT2_Mode1              (0 << 0 | 0 << 4 | 0 << 5)
+#define CNT2_Mode2              (1 << 4 | 1 << 5)
+#define CNT2_Mode3              (0)
+
+/* Countting Base */
+#define TMR0_Mode0_Base              (32)
+#define TMR0_Mode1_Base              (256)
+#define TMR0_Mode2_Base              (1)
+#define TMR0_Mode3_Base              (1)
+#define TMR1_Mode0_Base              (32)
+#define TMR1_Mode1_Base              (256)
+#define TMR1_Mode2_Base              (1)
+#define TMR1_Mode3_Base              (1)
+#define TMR2_Mode0_Base              (256)
+#define TMR2_Mode1_Base              (256)
+#define TMR2_Mode2_Base              (256)
+#define TMR2_Mode3_Base              (1)
+
+#define CNT0_Mode0_Base              (32)
+#define CNT0_Mode1_Base              (256)
+#define CNT0_Mode2_Base              (1)
+#define CNT0_Mode3_Base              (1)
+#define CNT1_Mode0_Base              (32)
+#define CNT1_Mode1_Base              (256)
+#define CNT1_Mode2_Base              (1)
+#define CNT1_Mode3_Base              (1)
+#define CNT2_Mode0_Base              (256)
+#define CNT2_Mode1_Base              (256)
+#define CNT2_Mode2_Base              (256)
+#define CNT2_Mode3_Base              (1)
+
+/* Interrupt */
+#define TMR0_IE                 (1 << 1)
+#define CNT0_IE                 (1 << 1)
+#define TMR1_IE                 (1 << 3)
+#define CNT1_IE                 (1 << 3)
+#define TMR2_IE                 (1 << 5)
+#define CNT2_IE                 (1 << 5)
+#define IEA                     (1 << 7)
+
+/* Operations */
+#define TMR0_TR                 (1 << 4)
+#define CNT0_TR                 (1 << 4)
+#define TMR1_TR                 (1 << 6)
+#define CNT1_TR                 (1 << 6)
+#define TMR2_TR                 (1 << 2)
+#define CNT2_TR                 (1 << 2)
+
+/* Setting Registers */
+#define TMR0_MOD                TMOD
+#define CNT0_MOD                TMOD
+#define TMR1_MOD                TMOD
+#define CNT1_MOD                TMOD
+#define TMR2_MOD                T2CON
+#define CNT2_MOD                T2CON
+
+#define TMR0_CON                TCON
+#define CNT0_CON                TCON
+#define TMR1_CON                TCON
+#define CNT1_CON                TCON
+#define TMR2_CON                T2CON
+#define CNT2_CON                T2CON
+
+/* Counting Registers */
+#define TMR0_TH                 TH0
+#define TMR0_TL                 TL0
+#define CNT0_TH                 TH0
+#define CNT0_TL                 TL0
+#define TMR1_TH                 TH1
+#define TMR1_TL                 TL1
+#define CNT1_TH                 TH1
+#define CNT1_TL                 TL1
+#define TMR2_TH                 TH2
+#define TMR2_TL                 TL2
+#define CNT2_TH                 TH2
+#define CNT2_TL                 TL2
+
+#define TimerInit(timer,mode,time)      do {\
+        timer##_TH   = time / timer##_##mode##_Base; \
+        timer##_TL   = time % timer##_##mode##_Base; \
+        timer##_MOD |= (timer | timer##_##mode); \
+        timer##_CON |= timer##_TR; \
+        IE          |= (timer##_IE | IEA); \
+} while (0)
+
 
 #define MSTIMES                 (46)
 #define TIMES                   (65536 - (MSTIMES * 1000))
-#define SEC                     0
-#define MIN                     1
-#define HOUR                    2
+#define SEC                     (0)
+#define MIN                     (1)
+#define HOUR                    (2)
 
-extern bool TimerInit(unsigned char timer, unsigned long times);
 extern unsigned char TimeConvert(unsigned int sec, unsigned char fmt);
 extern unsigned char AsciiToInt(unsigned char ch);
 extern unsigned int  TimeSet(unsigned char *time);
