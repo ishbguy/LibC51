@@ -54,6 +54,9 @@
 #define STOP                    0
 #define OPEN                    1
 #define CLOSE                   0
+#define PHIGH                   1
+#define PLOW                    0
+
 
 #define BUFSIZE                 11
 
