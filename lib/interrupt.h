@@ -56,9 +56,9 @@
 #define INTRPT3_CON             XICON
 
 
-#define IntrptInit(num,type)    do {\
-        num##_CON |= num##_##type;\
-        num##_IE  |= (num | IEA);\
+#define IntrptInit(num,type)    do {    \
+        num##_CON |= num##_##type;      \
+        num##_IE  |= (num | IEA);       \
 } while (0)
 
 #endif

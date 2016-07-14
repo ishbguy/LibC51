@@ -140,12 +140,12 @@
 #define CNT2_TH                 TH2
 #define CNT2_TL                 TL2
 
-#define TimerInit(timer,mode,time)      do {\
-        timer##_TH   = time / timer##_##mode##_Base; \
-        timer##_TL   = time % timer##_##mode##_Base; \
-        timer##_MOD |= (timer | timer##_##mode); \
-        timer##_CON |= timer##_TR; \
-        IE          |= (timer##_IE | IEA); \
+#define TimerInit(timer,mode,time)      do {            \
+        timer##_TH   = time / timer##_##mode##_Base;    \
+        timer##_TL   = time % timer##_##mode##_Base;    \
+        timer##_MOD |= (timer | timer##_##mode);        \
+        timer##_CON |= timer##_TR;                      \
+        IE          |= (timer##_IE | IEA);              \
 } while (0)
 
 #endif
