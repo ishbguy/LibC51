@@ -30,7 +30,7 @@
  *       0      0       Standby, no operation
  *       0      1       Read a byte
  *       1      0       Write a byte
- *       1      1       Erase a byte
+ *       1      1       Erase a sector
  *
  *       WT2    WT1     WT0     Read    Write   Erase   Clock
  *       0      1       1       6T      30T     5471T   5Mhz
@@ -69,7 +69,7 @@
 #define MS1                     (1 << 1)
 
 /* CMD */
-#define CMD_IDIL                (0 << 1 | 0 << 0)
+#define CMD_Standby             (0 << 1 | 0 << 0)
 #define CMD_Read                (0 << 1 | 1 << 0)
 #define CMD_Write               (1 << 1 | 0 << 0)
 #define CMD_Erase               (1 << 1 | 1 << 1)
@@ -82,6 +82,29 @@
 /* Flash address range */
 #define FlashStartAddr          (0x2000)
 #define FlashEndAddr            (0x2FFF)
+#define SectorSize              (0x1FF)
+#define Sector1                 (0x2000)
+#define Sector2                 (0x2200)
+#define Sector3                 (0x2400)
+#define Sector4                 (0x2600)
+#define Sector5                 (0x2800)
+#define Sector6                 (0x2A00)
+#define Sector7                 (0x2C00)
+#define Sector8                 (0x2E00)
 
+
+/* Macro functions */
+#define FlashInit(time)         do {    \
+        ISP_CONTR |= time;              \
+} while(0)
+
+#define FlashReady()            do {    \
+        ISP_TRIG = 0x46;                \
+        ISP_TRIG = 0xB9;                \
+} while(0)
+
+#define FlashCMD(cmd)           do {    \
+        ISP_CMD |= cmd;                 \
+} while(0)
 
 #endif /* End of include guard: __FLASH_H__ */
