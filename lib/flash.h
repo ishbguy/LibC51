@@ -107,4 +107,28 @@
         ISP_CMD |= cmd;                 \
 } while(0)
 
+#define FlashStandby()          do {    \
+        ISP_CONTR = 0;                  \
+        ISP_CMD   = 0;                  \
+        ISP_TRIG  = 0;                  \
+        ISP_ADDRH = 0x80;               \
+        ISP_ADDRL = 0;                  \
+} while (0)
+
+#define FlashRead(addr)         ({      \
+                unsigned int Addr= addr;\
+                unsigned char Data;     \
+                                        \
+                FlashInit(STC_WT);      \
+                FlashCMD(CMD_Read);     \
+                ISP_ADDRL = Addr;       \
+                ISP_ADDRH = (Addr >> 8);\
+                FlashReady();           \
+                NOP();                  \
+                Data = ISP_DATA;        \
+                FlashStandby();         \
+                Data = Data;            \
+                })
+
+
 #endif /* End of include guard: __FLASH_H__ */
