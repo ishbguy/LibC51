@@ -40,15 +40,15 @@
  *
  *       STC89C52RC has 4k flash rom, which contains 8 sectors, from 2000H to 2FFFH.
  *
- *       Sector1        2000H~21FFH
- *       Sector2        2200H~23FFH
- *       Sector3        2400H~25FFH
- *       Sector4        2600H~27FFH
- *       Sector5        2800H~29FFH
- *       Sector6        2A00H~2BFFH
- *       Sector7        2C00H~2DFFH
- *       Sector8        2E00H~2FFFH
- *
+ *       Sector0        2000H~21FFH
+ *       Sector1        2200H~23FFH
+ *       Sector2        2400H~25FFH
+ *       Sector3        2600H~27FFH
+ *       Sector4        2800H~29FFH
+ *       Sector5        2A00H~2BFFH
+ *       Sector6        2C00H~2DFFH
+ *       Sector7        2E00H~2FFFH
+ *             
  *       PS: 1 could be changed to 1 and 0, 0 could only changed to 0, if we want to change
  *           0 to 1, we must erase 0 to become 1 then change it.
  */                                                                                                  
@@ -83,15 +83,14 @@
 #define FlashStartAddr          (0x2000)
 #define FlashEndAddr            (0x2FFF)
 #define SectorSize              (0x1FF)
-#define Sector1                 (0x2000)
-#define Sector2                 (0x2200)
-#define Sector3                 (0x2400)
-#define Sector4                 (0x2600)
-#define Sector5                 (0x2800)
-#define Sector6                 (0x2A00)
-#define Sector7                 (0x2C00)
-#define Sector8                 (0x2E00)
-
+#define Sector0                 (0x2000)
+#define Sector1                 (0x2200)
+#define Sector2                 (0x2400)
+#define Sector3                 (0x2600)
+#define Sector4                 (0x2800)
+#define Sector5                 (0x2A00)
+#define Sector6                 (0x2C00)
+#define Sector7                 (0x2E00)
 
 /* Macro functions */
 #define FlashInit(time)         do {    \
@@ -115,20 +114,38 @@
         ISP_ADDRL = 0;                  \
 } while (0)
 
-#define FlashRead(addr)         ({      \
-                unsigned int Addr= addr;\
-                unsigned char Data;     \
-                                        \
+#define FlashReadByte(addr,data)    do {\
                 FlashInit(STC_WT);      \
                 FlashCMD(CMD_Read);     \
-                ISP_ADDRL = Addr;       \
-                ISP_ADDRH = (Addr >> 8);\
+                ISP_ADDRL = addr;       \
+                ISP_ADDRH = (addr >> 8);\
                 FlashReady();           \
                 NOP();                  \
-                Data = ISP_DATA;        \
+                data = ISP_DATA;        \
                 FlashStandby();         \
-                Data = Data;            \
-                })
+} while(0)
 
+#define FlashWriteByte(addr,data)   do {\
+        unsigned int Addr = addr;       \
+        FlashInit(STC_WT);              \
+        FlashCMD(CMD_Write);            \
+        ISP_ADDRL = Addr;               \
+        ISP_ADDRH = (Addr >> 8);        \
+        ISP_DATA  = data;               \
+        FlashReady();                   \
+        NOP();                          \
+        FlashStandby();                 \
+} while(0)
+
+#define FlashEraseSector(sector)    do {\
+        unsigned int Addr = sector;     \
+        FlashInit(STC_WT);              \
+        FlashCMD(CMD_Erase);            \
+        ISP_ADDRL = Addr;               \
+        ISP_ADDRH = (Addr >> 8);        \
+        FlashReady();                   \
+        NOP();                          \
+        FlashStandby();                 \
+} while(0)
 
 #endif /* End of include guard: __FLASH_H__ */

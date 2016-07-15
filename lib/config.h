@@ -39,6 +39,8 @@
 #define RELAY3                  P2_5
 #define RELAY4                  P2_6
 
+#define STC_WT                  EN_ISP20
+
 /* Errors Code definitions */
 #define TRUE                    1
 #define FALSE                   0
