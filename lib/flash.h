@@ -82,7 +82,7 @@
 /* Flash address range */
 #define FlashStartAddr          (0x2000)
 #define FlashEndAddr            (0x2FFF)
-#define SectorSize              (0x1FF)
+#define SectorSize              (0x200)
 #define Sector0                 (0x2000)
 #define Sector1                 (0x2200)
 #define Sector2                 (0x2400)
@@ -115,22 +115,21 @@
 } while (0)
 
 #define FlashReadByte(addr,data)    do {\
-                FlashInit(STC_WT);      \
-                FlashCMD(CMD_Read);     \
-                ISP_ADDRL = addr;       \
-                ISP_ADDRH = (addr >> 8);\
-                FlashReady();           \
-                NOP();                  \
-                data = ISP_DATA;        \
-                FlashStandby();         \
+        FlashInit(STC_WT);              \
+        FlashCMD(CMD_Read);             \
+        ISP_ADDRL = addr;               \
+        ISP_ADDRH = (addr >> 8);        \
+        FlashReady();                   \
+        NOP();                          \
+        data = ISP_DATA;                \
+        FlashStandby();                 \
 } while(0)
 
 #define FlashWriteByte(addr,data)   do {\
-        unsigned int Addr = addr;       \
         FlashInit(STC_WT);              \
         FlashCMD(CMD_Write);            \
-        ISP_ADDRL = Addr;               \
-        ISP_ADDRH = (Addr >> 8);        \
+        ISP_ADDRL = addr;               \
+        ISP_ADDRH = (addr >> 8);        \
         ISP_DATA  = data;               \
         FlashReady();                   \
         NOP();                          \
@@ -138,11 +137,10 @@
 } while(0)
 
 #define FlashEraseSector(sector)    do {\
-        unsigned int Addr = sector;     \
         FlashInit(STC_WT);              \
         FlashCMD(CMD_Erase);            \
-        ISP_ADDRL = Addr;               \
-        ISP_ADDRH = (Addr >> 8);        \
+        ISP_ADDRL = addr;               \
+        ISP_ADDRH = (addr >> 8);        \
         FlashReady();                   \
         NOP();                          \
         FlashStandby();                 \
