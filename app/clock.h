@@ -13,8 +13,8 @@
 #define MIN                     (1)
 #define HOUR                    (2)
 
-extern unsigned char TimeConvert(unsigned int sec, unsigned char fmt);
+extern unsigned char TimeConvert(unsigned short sec, unsigned char fmt);
 extern unsigned char AsciiToInt(unsigned char ch);
-extern unsigned int  TimeSet(unsigned char *time);
+extern unsigned short  TimeSet(unsigned char *time);
 
 #endif /* End of include guard: __CLOCK_H__ */

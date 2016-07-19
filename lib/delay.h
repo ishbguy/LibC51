@@ -15,7 +15,7 @@ extern void Delay10us(unsigned char time);
  *
  * @param time  Time * 10ms to be delay.
  */
-extern void Delay1ms(unsigned int time);
+extern void Delay1ms(unsigned short time);
 
 
 #endif

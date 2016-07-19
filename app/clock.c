@@ -7,7 +7,7 @@
 #include "config.h"
 #include "clock.h"
 
-unsigned char TimeConvert(unsigned int sec, unsigned char fmt)
+unsigned char TimeConvert(unsigned short sec, unsigned char fmt)
 {
         extern bool apm;
         if(fmt == HOUR) {
@@ -27,7 +27,7 @@ unsigned char AsciiToInt(unsigned char ch)
         return (unsigned char)(ch - '0');
 }
 
-unsigned int TimeSet(unsigned char *time)
+unsigned short TimeSet(unsigned char *time)
 {
         extern bool apm;
         unsigned char hour, min, sec;
