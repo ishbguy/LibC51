@@ -25,9 +25,6 @@
 #ifndef __INTERRUPT_H__
 #define __INTERRUPT_H__
 
-#include "config.h"
-#include <stdbool.h>
-
 /* Interrupt number */
 #define INTRPT0                 (1 << 0)
 #define INTRPT1                 (1 << 2)

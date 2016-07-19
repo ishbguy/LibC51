@@ -29,9 +29,6 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
-#include "config.h"
-#include <stdbool.h>
-
 /* Usages */
 #define TMR0                    (0 << 2)
 #define CNT0                    (1 << 2)

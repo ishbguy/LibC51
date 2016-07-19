@@ -34,8 +34,6 @@
 #ifndef __WDT_H__
 #define __WDT_H__
 
-#include "config.h"
-
 /* Register bit */
 #define PS0                     (1 << 0)
 #define PS1                     (1 << 1)
