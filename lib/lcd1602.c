@@ -242,7 +242,7 @@ unsigned char LcdPrintf(unsigned char *fmt, ...)
                                 len += LcdDisplayString(va_arg(ap, unsigned char *));
                                 break;
                         case 'd':
-                                len += LcdIntToAscii(va_arg(ap, unsigned long));
+                                len += LcdIntToAscii(va_arg(ap, unsigned short));
                                 break;
                         case 'f':
                                 len += LcdDisplayChar(va_arg(ap, float));

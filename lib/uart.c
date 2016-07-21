@@ -85,7 +85,7 @@ unsigned char UartPrintf(unsigned char *fmt, ...)
                                 len += UartSendStr(va_arg(ap, unsigned char *));
                                 break;
                         case 'd':
-                                len += UartIntToAscii(va_arg(ap, unsigned long));
+                                len += UartIntToAscii(va_arg(ap, unsigned short));
                                 break;
                         case 'f':
                                 len += UartSendChar(va_arg(ap, float));
