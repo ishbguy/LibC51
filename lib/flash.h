@@ -55,7 +55,7 @@
 #ifndef __FLASH_H__
 #define __FLASH_H__
 
-#include "config.h"
+#include <stdbool.h>
 
 /* Register bit */
 #define WT0                     (1 << 0)
@@ -72,7 +72,7 @@
 #define CMD_Standby             (0 << 1 | 0 << 0)
 #define CMD_Read                (0 << 1 | 1 << 0)
 #define CMD_Write               (1 << 1 | 0 << 0)
-#define CMD_Erase               (1 << 1 | 1 << 1)
+#define CMD_Erase               (1 << 1 | 1 << 0)
 
 #define EN_ISP5                 (ISPEN | WT1 | WT0)
 #define EN_ISP10                (ISPEN | WT1)
@@ -139,11 +139,24 @@
 #define FlashEraseSector(sector)    do {\
         FlashInit(STC_WT);              \
         FlashCMD(CMD_Erase);            \
-        ISP_ADDRL = addr;               \
-        ISP_ADDRH = (addr >> 8);        \
+        ISP_ADDRL = sector;             \
+        ISP_ADDRH = (sector >> 8);      \
         FlashReady();                   \
         NOP();                          \
         FlashStandby();                 \
 } while(0)
+
+typedef struct memory {
+        unsigned short start;
+        unsigned short end;
+        unsigned short pos;
+        unsigned short total;
+        unsigned short free;
+} memory;
+
+extern void MemInit(memory * mem);
+extern unsigned char MemReadByte(memory * mem, unsigned short addr);
+extern bool MemWriteByte(memory * mem, unsigned char data);
+extern bool MemEraseSector(memory * mem, unsigned short secaddr);
 
 #endif /* End of include guard: __FLASH_H__ */

@@ -1,6 +1,6 @@
 NAME	:= test
 BIN 	:= $(NAME).bin
-SRC 	:= $(NAME).c clock.c delay.c dht11.c lcd1602.c relay.c uart.c interrupt_service.c
+SRC 	:= $(NAME).c clock.c delay.c dht11.c lcd1602.c relay.c uart.c interrupt_service.c flash.c
 INC	:= lib app
 OBJ 	:= $(subst .c,.rel,$(SRC))
 OUTPUT	:= *.bin *.hex *.ihx *.asm *.lk *.lst *.map *.mem *.rel *.rst *.sym
