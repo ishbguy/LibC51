@@ -4,7 +4,7 @@
  * Auth: ishbguy@hotmail.com
  * Date: 2016-07-08 16:18:27 
  */
-#include "config.h"
+#include "../lib/config.h"
 #include "interrupt.h"
 #include "uart.h"
 #include "timer.h"

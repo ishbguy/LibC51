@@ -4,7 +4,7 @@
  * Auth: ishbguy@hotmail.com
  * Date: 2016-07-11 22:09:03 
  */
-#include "config.h"
+#include "../lib/config.h"
 #include "clock.h"
 
 unsigned char TimeConvert(unsigned short sec, unsigned char fmt)

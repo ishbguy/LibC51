@@ -4,7 +4,7 @@
  *
  */
 
-#include "config.h"
+#include "../lib/config.h"
 #include "relay.h"
 
 unsigned char RelayExe(unsigned char hum, unsigned char tem)
