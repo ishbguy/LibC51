@@ -12,3 +12,4 @@
 *.swp
 main.*
 test.*
+makefile
